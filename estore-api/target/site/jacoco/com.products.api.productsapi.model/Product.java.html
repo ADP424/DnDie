@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Product.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">products-api</a> &gt; <a href="index.source.html" class="el_package">com.products.api.productsapi.model</a> &gt; <span class="el_source">Product.java</span></div><h1>Product.java</h1><pre class="source lang-java linenums">package com.products.api.productsapi.model;
+
+import java.util.logging.Logger;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+/**
+ * Represents a Product entity
+ * 
+ * @author Team 1
+ */
+public class Product {
+<span class="fc" id="L12">    private static final Logger LOG = Logger.getLogger(Product.class.getName());</span>
+
+    // Package private for tests
+    static final String STRING_FORMAT = &quot;Product [id = %d, name = %s, dice_color = %s, font_type = %s, font_color = %s]&quot;;
+
+    @JsonProperty(&quot;id&quot;) private int id;
+    @JsonProperty(&quot;name&quot;) private String name;
+    @JsonProperty(&quot;dice_color&quot;) private String dice_color;
+    @JsonProperty(&quot;font_type&quot;) private String font_type;
+    @JsonProperty(&quot;font_color&quot;) private String font_color;
+    @JsonProperty(&quot;price&quot;) private double price;
+    @JsonProperty(&quot;coupon&quot;) private int coupon;
+    @JsonProperty(&quot;quantity&quot;) private int quantity;
+
+    /**
+     * Create a product with the given id, name, font type, font color, and dice color
+     * @param id The id of the product
+     * @param name The name of the product
+     * @param font_type The font of the product
+     * @param font_color The font color of the product
+     * @param Dice_color The color of the product
+     * @param price the price of the dice set
+     * 
+     * {@literal @}JsonProperty is used in serialization and deserialization
+     * of the JSON object to the Java object in mapping the fields.  If a field
+     * is not provided in the JSON object, the Java field gets the default Java
+     * value, i.e. 0 for int
+     */
+    public Product(@JsonProperty(&quot;id&quot;) int id, @JsonProperty(&quot;name&quot;) String name, 
+    @JsonProperty(&quot;dice_color&quot;) String dice_color,
+    @JsonProperty(&quot;font_type&quot;) String font_type,
+    @JsonProperty(&quot;font_color&quot;)  String font_color,
+    @JsonProperty(&quot;price&quot;)  Double price,
+    @JsonProperty(&quot;coupon&quot;)  int coupon,
+    @JsonProperty(&quot;quantity&quot;)  int quantity
+<span class="fc" id="L47">     ) {</span>
+<span class="fc" id="L48">        this.id = id;</span>
+<span class="fc" id="L49">        this.name = name;</span>
+<span class="fc" id="L50">        this.dice_color = dice_color;</span>
+<span class="fc" id="L51">        this.font_type = font_type;</span>
+<span class="fc" id="L52">        this.font_color = font_color;</span>
+<span class="fc" id="L53">        this.price = price;</span>
+<span class="fc" id="L54">        this.coupon = coupon;</span>
+<span class="fc" id="L55">        this.quantity = quantity;</span>
+<span class="fc" id="L56">    }</span>
+
+    /**
+     * Retrieves the id of the product
+     * @return The id of the product
+     */
+<span class="fc" id="L62">    public int getId() {return id;}</span>
+
+
+    /**
+     * Retrieves the name of the product
+     * @return The name of the product
+     */
+<span class="fc" id="L69">    public String getName() {return name;}</span>
+
+    /**
+     * Retrieves the dice color of the product
+     * @return The dice_color of the product
+     */
+<span class="fc" id="L75">    public String getDiceColor() {return dice_color;}</span>
+
+    /**
+     * Retrieves the font type of the product
+     * @return The font type of the product
+     */
+<span class="fc" id="L81">    public String getFontType() {return font_type;}</span>
+
+    /**
+     * Retrieves the font color of the product
+     * @return The font color of the product
+     */
+<span class="fc" id="L87">    public String getFontColor() {return font_color;}</span>
+
+    /**
+     * gets the price of a product
+     * @return the price
+     */
+<span class="fc" id="L93">    public Double getPrice() {return price;}</span>
+
+<span class="fc" id="L95">    public Integer getCoupon() {return coupon;}</span>
+
+<span class="fc" id="L97">    public Integer getQuantity() {return quantity;}</span>
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+<span class="fc" id="L105">        return String.format(STRING_FORMAT, id, name, dice_color, font_type, font_color, price);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

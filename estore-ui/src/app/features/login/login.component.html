@@ -1,0 +1,22 @@
+<div *ngIf="router.url == '/login'">
+  <link rel="stylesheet" href="/assets/css/forms.css">
+  <title>DNDie | Login</title>
+  <div class="form-container">
+    <h1 class="login-title">DNDie- Login</h1>
+    <form>
+      <div id="username-container">
+        <input class="user-input" type="text" name="username" [(ngModel)]="username" placeholder="Username">
+      </div>
+      <br>
+      <div id="password-container">
+        <input class="user-input" type="password" name="password" [(ngModel)]="password" placeholder="Password">
+      </div>
+      <br><br>
+      <div class="link-container">
+        <span class="noselect">New to DNDie? </span>
+        <span class="link secondary-link" (click)="NewUser()">Register here</span>
+      </div>
+      <button class="button right" type="submit" (click)="LoginUser()">Login</button>
+    </form>
+  </div>
+</div>

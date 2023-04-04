@@ -1,0 +1,88 @@
+.scroll-buffer {
+  height: 60px;
+}
+
+.main-container {
+  position: fixed;
+  z-index: 0;
+  width: 60%;
+  height: 100%;
+  overflow: scroll;
+  overflow-x: clip;
+  padding-left: 10%;
+  padding-right: 10%;
+  left: 10%;
+  color: lightgray;
+  background-color: rgba(13, 59, 48, 0.774)
+}
+
+.buffer {
+  padding-top: 9%;
+}
+
+.detail-container {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  height: 50%;
+  padding: 5%;
+  /* top:16%; */
+  top: 15%;
+  left: 20%;
+  color: lightgray;
+  background-color: rgba(13, 59, 48, 0.774)
+}
+
+.product-title {
+  font-size: 3em;
+}
+
+.product-img {
+  float: left;
+  height: 70%;
+  padding: 5%;
+  background: rgba(87, 87, 87, 0.37);
+  border: 1px solid var(--secondary-link-color);
+  border-radius: 1%;
+}
+
+.product-detail {
+  text-align: left;
+  width: 50%;
+  height: 70%;
+  /* background:gray; */
+  margin-left: 10%;
+}
+
+.cart-container{
+  width:80%;
+  border:1px solid white;
+  position:relative;
+  padding:5%;
+  left:5%;
+  text-align:left;
+}
+
+::-webkit-scrollbar-thumb {
+  /* display:none; */
+  background-image: url('/assets/images/logo.png'); 
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #222222;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(104, 104, 104);
+  
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

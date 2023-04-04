@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoginController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">products-api</a> &gt; <a href="index.source.html" class="el_package">com.products.api.productsapi.controller</a> &gt; <span class="el_source">LoginController.java</span></div><h1>LoginController.java</h1><pre class="source lang-java linenums">package com.products.api.productsapi.controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.http.MediaType;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.products.api.productsapi.persistence.UserDAO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.products.api.productsapi.model.User;
+
+/**
+ * Handles the REST API requests for the User resource
+ * &lt;p&gt;
+ * {@literal @}RestController Spring annotation identifies this class as a REST API
+ * method handler to the Spring framework
+ * 
+ * @author Team 1
+ */
+
+@RestController
+@RequestMapping(&quot;login&quot;)
+@CrossOrigin(origins = &quot;http://mdbook.me:4200&quot;, maxAge = 3600)
+public class LoginController {
+<span class="fc" id="L37">    private static final Logger LOG = Logger.getLogger(UserController.class.getName());</span>
+    private UserDAO userDao;
+
+    /**
+     * Creates a REST API controller to reponds to requests
+     * 
+     * @param userDao The {@link UserDAO User Data Access Object} to perform CRUD operations
+     * &lt;br&gt;
+     * This dependency is injected by the Spring Framework
+     */
+<span class="fc" id="L47">    public LoginController(UserDAO userDao) {</span>
+<span class="fc" id="L48">        this.userDao = userDao;</span>
+<span class="fc" id="L49">    }</span>
+
+    /**
+     * Responds to the GET request for a {@linkplain User user} for the given id
+     * 
+     * @param username The username associated with the {@link User user}
+     * 
+     * @return ResponseEntity with {@link User user} object and HTTP status of OK if found&lt;br&gt;
+     * ResponseEntity with HTTP status of NOT_FOUND if not found&lt;br&gt;
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+
+    /**
+     * Creates a {@linkplain User user} with the provided user object
+     * 
+     * @param user - The {@link User user} to create
+     * 
+     * @return ResponseEntity with created {@link User user} object and HTTP status of CREATED&lt;br&gt;
+     * ResponseEntity with HTTP status of CONFLICT if {@link User user} object already exists&lt;br&gt;
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PostMapping(&quot;&quot;)
+    public ResponseEntity&lt;String&gt; createUser(@RequestBody String user) {
+<span class="nc" id="L72">        LOG.info(&quot;POST /login&quot;);</span>
+<span class="nc" id="L73">        JSONObject errObj = new JSONObject();</span>
+<span class="nc" id="L74">        errObj.append(&quot;success&quot;, false);</span>
+<span class="nc" id="L75">        errObj.append(&quot;username&quot;, &quot;&quot;);</span>
+<span class="nc" id="L76">        errObj.append(&quot;first_name&quot;, &quot;&quot;);</span>
+<span class="nc" id="L77">        errObj.append(&quot;last_name&quot;, &quot;&quot;);</span>
+<span class="nc" id="L78">        errObj.append(&quot;cart_number&quot;, -1);</span>
+<span class="nc" id="L79">        errObj.append(&quot;is_admin&quot;, false);</span>
+<span class="nc" id="L80">        String errRet = errObj.toString();</span>
+<span class="nc" id="L81">        JSONObject userData = new JSONObject(user);</span>
+        String username, password;
+        try {
+<span class="nc" id="L84">            JSONObject data = (JSONObject) userData.get(&quot;body&quot;);</span>
+<span class="nc" id="L85">            username = data.getString(&quot;username&quot;);</span>
+<span class="nc" id="L86">            password = data.getString(&quot;password&quot;);</span>
+<span class="nc" id="L87">        } catch (JSONException e) {</span>
+<span class="nc" id="L88">            return new ResponseEntity&lt;String&gt;(errRet, HttpStatus.BAD_REQUEST);</span>
+<span class="nc" id="L89">        }</span>
+        try {
+<span class="nc" id="L91">            User u = userDao.getUser(username);</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            if (u == null) {</span>
+<span class="nc" id="L93">                return new ResponseEntity&lt;String&gt;(errRet, HttpStatus.OK);</span>
+            }
+<span class="nc bnc" id="L95" title="All 2 branches missed.">            if (password.equals(u.getPassword())) {</span>
+<span class="nc" id="L96">                User retU = u;</span>
+<span class="nc" id="L97">                JSONObject retUser = new JSONObject();</span>
+<span class="nc" id="L98">                retUser.append(&quot;username&quot;, retU.getUsername());</span>
+<span class="nc" id="L99">                retUser.append(&quot;first_name&quot;, retU.getFirstName());</span>
+<span class="nc" id="L100">                retUser.append(&quot;last_name&quot;, retU.getLastName());</span>
+<span class="nc" id="L101">                retUser.append(&quot;cart_number&quot;, retU.getCartNumber());</span>
+<span class="nc" id="L102">                retUser.append(&quot;is_admin&quot;, retU.get_is_admin());</span>
+<span class="nc" id="L103">                retUser.append(&quot;success&quot;, true);</span>
+<span class="nc" id="L104">                return new ResponseEntity&lt;String&gt;(retUser.toString(), HttpStatus.OK);</span>
+            } else {
+<span class="nc" id="L106">                return new ResponseEntity&lt;String&gt;(errRet, HttpStatus.OK);</span>
+            }
+<span class="nc" id="L108">        } catch (IOException e) {</span>
+<span class="nc" id="L109">            LOG.info(e.toString());</span>
+        }
+<span class="nc" id="L111">        return new ResponseEntity&lt;String&gt;(errRet, HttpStatus.I_AM_A_TEAPOT);        </span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

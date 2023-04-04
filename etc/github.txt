@@ -1,0 +1,112 @@
+commit cdccb9822953c0f8b53075eda0426bf9818249da
+Author: alexb <ajb3715@g.rit.edu>
+Date:   Thu Feb 3 09:09:26 2022 -0500
+
+    Commited name to read me
+
+commit 312fc4e09d117abd1281e4d7e5d172934eb44b41
+Author: Michael Burke <mdb5315@rit.edu>
+Date:   Thu Feb 3 14:07:54 2022 +0000
+
+    Put myself on top
+
+commit 2bfe525b2e1af12a19ea070bd43272df38c0fa76
+Author: Michael Burke <mdb5315@rit.edu>
+Date:   Thu Feb 3 14:06:37 2022 +0000
+
+    your mom has been OBLITERATED
+
+commit 97c3a244065a6b02f60b3e957228481eb1b2fb61
+Author: Michael Burke <mdb5315@rit.edu>
+Date:   Thu Feb 3 14:04:13 2022 +0000
+
+    yeet
+
+commit 5d9cb892e27d372d344f97eb4585aacc7f38badd
+Author: iv1309 <iv1309@g.rit.edu>
+Date:   Thu Feb 3 09:03:42 2022 -0500
+
+    pp
+
+commit d4b44ae634fec3c141a3f34faa7a0e9d86ce79c7
+Merge: bffad83 f00541a
+Author: Michael Burke <mdb5315@rit.edu>
+Date:   Thu Feb 3 14:02:15 2022 +0000
+
+    Merge branch 'main' of https://github.com/RIT-SWEN-261-04/team-project-2215-swen-261-04-1-team1 into main
+
+commit bffad83f9506b6dd8ab1196bd18008a79404aa6d
+Author: Michael Burke <mdb5315@rit.edu>
+Date:   Thu Feb 3 14:02:02 2022 +0000
+
+    haha yeet
+
+commit f00541af3399830c46abc59a2c40e50048886aa5
+Merge: 00c596e 2e0b396
+Author: ABD6834 <abd6834@rit.edu>
+Date:   Thu Feb 3 09:01:33 2022 -0500
+
+    Merge branch 'main' of https://github.com/RIT-SWEN-261-04/team-project-2215-swen-261-04-1-team1
+
+commit 00c596e56c91f63df96f03822eab0023efd46489
+Author: ABD6834 <abd6834@rit.edu>
+Date:   Thu Feb 3 09:01:19 2022 -0500
+
+    resurrected your mom
+
+commit 2e0b396688498bc92fd4dcc1e944ac61818c13b9
+Merge: 2898922 8b2f750
+Author: iv1309 <iv1309@g.rit.edu>
+Date:   Thu Feb 3 09:00:58 2022 -0500
+
+    Merge branch 'main' of https://github.com/RIT-SWEN-261-04/team-project-2215-swen-261-04-1-team1 into main
+    haha yolo
+
+commit 28989229ab9fc58a5e5e3602aea884af05589f90
+Author: iv1309 <iv1309@g.rit.edu>
+Date:   Thu Feb 3 08:59:30 2022 -0500
+
+    added name
+
+commit 8b2f7501f2ade975787a48c0aab9bb7a0539541a
+Author: Michael Burke <mdb5315@rit.edu>
+Date:   Thu Feb 3 13:59:16 2022 +0000
+
+    Deleted your mom
+
+commit 543601ffcc1257b6c39525a807b8a910bbe0ffb5
+Author: Michael Burke <mdb5315@rit.edu>
+Date:   Thu Feb 3 13:57:52 2022 +0000
+
+    Readme bb
+
+commit 5c17c432f2081b8f1bfdb176d5369c68267000fd
+Merge: 7b34f30 ea12641
+Author: alexb <ajb3715@g.rit.edu>
+Date:   Thu Feb 3 08:55:52 2022 -0500
+
+    Merge branch 'main' of https://github.com/RIT-SWEN-261-04/team-project-2215-swen-261-04-1-team1
+
+commit 7b34f30b5c69c3c9c6a221cc6a2623c6634361cd
+Author: alexb <ajb3715@g.rit.edu>
+Date:   Thu Feb 3 08:55:01 2022 -0500
+
+    Commited name to read me
+
+commit ea12641a0f7602821c38890327648faf9daf3fbd
+Author: Michael Burke <mdb5315@rit.edu>
+Date:   Thu Feb 3 13:54:40 2022 +0000
+
+    your mom
+
+commit f52d1f24b1cdc0389f3a16b46a57b751902d94d5
+Author: ABD6834 <abd6834@rit.edu>
+Date:   Thu Feb 3 08:47:30 2022 -0500
+
+    added my name to readme yo
+
+commit 590bc7ea4f65343f2a606ab9ef23bd89d324eb46
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Thu Feb 3 13:38:46 2022 +0000
+
+    Initial commit

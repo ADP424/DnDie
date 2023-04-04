@@ -1,0 +1,21 @@
+<link rel="icon" type="image/x-icon" href="/assets/images/logo.png">
+<link rel="preload" as="style" href='/assets/css/forms.css'>
+<link rel="preload" as="style" href='/assets/css/pages.css'>
+<link rel="preload" as="style" href='/assets/css/tabs.css'>
+<link rel="preload" as="style" href='/assets/css/search.css'>
+
+<img class="background" src="/assets/images/wilds.jpg">
+<link rel="stylesheet" href="/assets/css/global.css">
+<nav class="nav-bar">
+  <h1 class="main-title">{{title}}</h1>
+  <a class="link nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+  <a class="link nav-link" routerLink="/products" routerLinkActive="active">Products</a>
+  <a class="link nav-link" routerLink="/cart" routerLinkActive="active">Cart</a>
+  <a class="link nav-link" routerLink="/login" routerLinkActive="active"
+    *ngIf="loginService.isUserLoggedOut()">Login</a>
+  <a class="link nav-link" routerLink="/logout" routerLinkActive="active" *ngIf="loginService.isUserLoggedIn()">Log
+    Out</a>
+  <a class="link nav-link" routerLink="/admin" routerLinkActive="active" *ngIf="loginService.userIsAdmin()">Admin</a>
+</nav>
+<router-outlet></router-outlet>
+<!--<app-messages></app-messages>-->

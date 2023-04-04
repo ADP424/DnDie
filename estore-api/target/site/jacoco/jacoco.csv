@@ -1,0 +1,13 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+products-api,com.products.api.productsapi.controller,UserController,0,108,0,6,0,28,0,8,0,5
+products-api,com.products.api.productsapi.controller,LoginController,155,11,4,0,33,4,3,2,1,2
+products-api,com.products.api.productsapi.controller,CartController,5,166,1,9,1,42,1,11,0,7
+products-api,com.products.api.productsapi.controller,ProductController,0,204,0,12,0,51,0,14,0,8
+products-api,com.products.api.productsapi.model,Cart,0,46,0,0,0,11,0,7,0,7
+products-api,com.products.api.productsapi.model,User,0,89,0,2,0,18,0,10,0,9
+products-api,com.products.api.productsapi.model,Product,0,97,0,0,0,20,0,11,0,11
+products-api,com.products.api.productsapi.persistence,UserFileDAO,16,197,7,9,2,41,4,14,0,10
+products-api,com.products.api.productsapi.persistence,CartFileDAO,4,250,3,11,1,52,3,16,0,12
+products-api,com.products.api.productsapi.persistence,ProductFileDAO,0,312,3,19,0,59,3,21,0,13
+products-api,com.products.api.productsapi,ProductsApiApplication,8,0,0,0,3,0,2,0,2,0
+products-api,com.products.api.productsapi,WebConfig,35,0,0,0,4,0,2,0,2,0

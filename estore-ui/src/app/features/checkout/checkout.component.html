@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="/assets/css/pages.css">
+<link rel="stylesheet" href="/assets/css/forms.css">
+<link rel="stylesheet" href="/assets/css/product.css">
+<div *ngIf="router.url == '/cart'">
+  <title>DNDie | Checkout</title>
+  <div class="main-container centered">
+    <div class="scroll-buffer"></div>
+    <h1 class="checkout-title">DNDie- Checkout</h1>
+    <div class="cart-container" *ngIf="cart && cart.array.length > 0">
+    <div>
+      <div *ngFor="let product of sortBy(productsInCart)">
+        <a routerLink="/detail/{{product.id}}">
+          <img class="productImg" src="/assets/dice/{{product.name}}.png">
+        </a>
+        <div class="product-info-container">
+          <span class="badge">
+            {{product.name}}
+            <br>
+            Price: ${{product.price}}
+          </span>
+        </div>
+        <button class="delete-btn button" type="submit" (click)="delete(product)">Delete</button>
+        <hr>
+        <script>
+          console.log('hello')
+        </script>
+      </div>
+      <div style="text-align:right;">
+        <h3 class="">Total Price: ${{newPrice}}</h3>
+        <button class="button " type="submit" (click)="checkout()">Checkout</button>
+      </div>
+    </div>
+    </div>
+    <div *ngIf="cart == null || cart.array.length == 0">
+      <img src="/assets/dice/Classic.png" class="cart-empty-img">
+      <br><br>
+      <h2>Uh-oh, there's nothing here yet! <span class="link" (click)="router.navigate(['/products'])">Continue
+          browsing</span></h2>
+    </div>
+    
+    <div class="scroll-buffer"></div>
+  </div>
+</div>

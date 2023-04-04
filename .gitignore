@@ -1,0 +1,5 @@
+package-lock.json
+estore-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+estore-api/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+*.class
+*.lst

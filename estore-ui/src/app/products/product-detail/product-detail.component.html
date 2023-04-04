@@ -1,0 +1,25 @@
+<div *ngIf="die">
+  <title>DNDie | {{die.name}}</title>
+  <link rel="stylesheet" href="/assets/css/pages.css">
+  <link rel="stylesheet" href="/assets/css/forms.css">
+  <div class="main-container detail-container centered">
+    <img src="/assets/dice/{{die.name}}.png" alt="{{die.name}}" class="product-img">
+    <div class="product-detail">
+
+      <h2 class="product-title">{{die.name | uppercase}}</h2>
+      <div>Price: ${{die.price}}</div><br><br>
+      <div>{{die.quantity}} left in stock</div><br><br>
+      <div>Coupon: {{die.coupon}}%</div><br><br>
+      <div>
+        <!-- <label>name:
+        <input [(ngModel)]="die.name" placeholder="name"/>
+      </label> -->
+      </div>
+      <button class="button" (click)="goBack()">Back</button>
+      <span class="display-cart-equals-{{die.quantity}}" *ngIf="loginService.isUserLoggedIn()">
+        <div class="spacer"></div>
+        <button class="button" (click)="addToCart(die)" id="add-to-cart">Add to Cart</button>
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+.spacer {
+  display: inline-block;
+  width: 10%;
+}
+
+.button {
+  margin-bottom: 10%;
+}
+
+.display-cart-equals-0{
+  display:none;
+}

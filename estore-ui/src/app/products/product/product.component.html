@@ -1,0 +1,20 @@
+<div *ngIf="router.url == '/products'">
+  <link rel="stylesheet" href="/assets/css/pages.css">
+  <link rel="stylesheet" href="/assets/css/product.css">
+  <title>DNDie | Products</title>
+  <div class="main-container centered">
+    <div class="scroll-buffer"></div>
+    <h2>DICE SETS</h2>
+    <app-product-search (searchDice)="searchDice()" [searchTerms] = "searchTerms"></app-product-search>
+    <span>{{searchTerms}}</span>
+    <span *ngFor="let product of sortBy(products)">
+      <div *ngIf="product.name" class="productContainer" (click)="router.navigate(['/detail/'+product.id])">
+        <!-- router.navigate(['{{product.name}}']) -->
+        <img class="productImg" src="/assets/dice/{{product.name}}.png">
+        <div class="productTitle">{{product.name}}</div>
+      </div>
+    </span>
+
+    <div class="scroll-buffer"></div>
+  </div>
+</div>

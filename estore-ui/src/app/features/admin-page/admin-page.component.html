@@ -1,0 +1,90 @@
+<div *ngIf="router.url.split('/').length > 1 && router.url.split('/')[1] == 'admin'">
+  <title>DNDie | Admin</title>
+  <link rel="stylesheet" href="/assets/css/forms.css">
+  <link rel="stylesheet" href="/assets/css/tabs.css">
+  <div class="form-container">
+    <div class="tab-container">
+      <table class="tab-nav">
+        <tr>
+          <th class="tab-item clickable tab-link" [ngClass]="{'tab-active' : router.url == '/admin/add'}"
+            (click)="router.navigate(['/admin/add']);">
+            <span>Add</span>
+          </th>
+          <th class="tab-item clickable tab-link" [ngClass]="{'tab-active' : router.url == '/admin/update'}"
+            (click)="router.navigate(['/admin/update']);">
+            <span>Update</span>
+          </th>
+          <th class="tab-item clickable tab-link" [ngClass]="{'tab-active' : router.url == '/admin/delete'}"
+            (click)="router.navigate(['/admin/delete']);">
+            <span>Delete</span>
+          </th>
+
+        </tr>
+      </table>
+      <br>
+    </div>
+
+    <div *ngIf="router.url == '/admin/add'" id="addproductlayout">
+      <div>
+        <input class="user-input short" name="Product Name" [(ngModel)]="name" placeholder="Product Name">
+        <input class="user-input short right" name="Dice Color" [(ngModel)]="dice_color" placeholder="Dice Color">
+      </div>
+      <br>
+      <div>
+        <input class="user-input short" name="Font Type" [(ngModel)]="font_type" placeholder="Font Type">
+        <input class="user-input short right" name="Font Color" [(ngModel)]="font_color" placeholder="Font Color">
+      </div>
+      <br>
+      <div>
+        <input class="user-input short" name="Price" [(ngModel)]="price" placeholder="Price">
+        <input class="user-input short right" name="Quantity" [(ngModel)]="quantity" placeholder="Quantity">
+      </div>
+      <br>
+      <div>
+        <input class="user-input" name="Coupon" [(ngModel)]="coupon" placeholder="Coupon">
+      </div>
+      <br><br>
+      <div>
+        <button class="button right" type="submit" (click)="addProduct()">Add Product</button>
+      </div>
+    </div>
+
+    <div *ngIf="router.url == '/admin/update'" id="updateproductlayout">
+      <div>
+        <input class="user-input" name="Product ID" [(ngModel)]="id_to_update" placeholder="Product ID">
+      </div>
+      <br>
+      <div>
+        <input class="user-input short right" name="Dice Color" [(ngModel)]="dice_color_to_update"
+          placeholder="Dice Color">
+        <input class="user-input short" name="Product Name" [(ngModel)]="name_to_update" placeholder="Product Name">
+      </div>
+      <br>
+      <div>
+        <input class="user-input short" name="Font Type" [(ngModel)]="font_type_to_update" placeholder="Font Type">
+        <input class="user-input short right" name="Font Color" [(ngModel)]="font_color_to_update"
+          placeholder="Font Color">
+      </div>
+      <br>
+      <div>
+        <input class="user-input short" name="Price" [(ngModel)]="price_to_update" placeholder="Price">
+        <input class="user-input short right" name="Quantity" [(ngModel)]="quantity_to_update" placeholder="Quantity">
+      </div>
+      <br>
+      <div>
+        <input class="user-input" name="Coupon" [(ngModel)]="coupon_to_update" placeholder="Coupon">
+      </div>
+
+      <br><br>
+      <button class="button right" type="submit" (click)="updateProduct()">Update Product</button>
+    </div>
+
+    <div *ngIf="router.url == '/admin/delete'" id="deleteproductlayout">
+      <div id="product-id-container">
+        <input class="user-input" name="Product ID" [(ngModel)]="id" placeholder="Product ID">
+      </div>
+      <br><br>
+      <button class="button right" type="submit" (click)="deleteProduct()">Delete Product</button>
+    </div>
+  </div>
+</div>

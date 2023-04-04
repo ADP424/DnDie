@@ -1,0 +1,23 @@
+.search-container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 30px;
+  background: white;
+  width: 40%;
+  display: inline-block;
+}
+
+.search-box {
+  border: none;
+  outline: none;
+  font-size: 30px;
+  width: 85%;
+}
+
+.search-icon {
+  position: relative;
+  top: 4px;
+  height: 30px;
+  padding-right: 20px;
+}

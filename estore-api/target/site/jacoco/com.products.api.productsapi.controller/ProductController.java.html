@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">products-api</a> &gt; <a href="index.source.html" class="el_package">com.products.api.productsapi.controller</a> &gt; <span class="el_source">ProductController.java</span></div><h1>ProductController.java</h1><pre class="source lang-java linenums">package com.products.api.productsapi.controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.products.api.productsapi.persistence.ProductDAO;
+import com.products.api.productsapi.model.Product;
+
+/**
+ * Handles the REST API requests for the Product resource
+ * &lt;p&gt;
+ * {@literal @}RestController Spring annotation identifies this class as a REST API
+ * method handler to the Spring framework
+ * 
+ * @author Team 1
+ */
+
+@RestController
+@RequestMapping(&quot;products&quot;)
+@CrossOrigin(origins = &quot;http://mdbook.me:4200&quot;, maxAge = 3600)
+public class ProductController {
+<span class="fc" id="L35">    private static final Logger LOG = Logger.getLogger(ProductController.class.getName());</span>
+    private ProductDAO productDao;
+
+    /**
+     * Creates a REST API controller to reponds to requests
+     * 
+     * @param productDao The {@link ProductDAO Product Data Access Object} to perform CRUD operations
+     * &lt;br&gt;
+     * This dependency is injected by the Spring Framework
+     */
+<span class="fc" id="L45">    public ProductController(ProductDAO productDao) {</span>
+<span class="fc" id="L46">        this.productDao = productDao;</span>
+<span class="fc" id="L47">    }</span>
+
+    /**
+     * Responds to the GET request for a {@linkplain Product product} for the given id
+     * 
+     * @param id The id used to locate the {@link Product product}
+     * 
+     * @return ResponseEntity with {@link Product product} object and HTTP status of OK if found&lt;br&gt;
+     * ResponseEntity with HTTP status of NOT_FOUND if not found&lt;br&gt;
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Product&gt; getProduct(@PathVariable int id) {
+<span class="fc" id="L60">        LOG.info(&quot;GET /products/&quot; + id);</span>
+        try {
+<span class="fc" id="L62">            Product product = productDao.getProduct(id);</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">            if (product != null)</span>
+<span class="fc" id="L64">                return new ResponseEntity&lt;Product&gt;(product,HttpStatus.OK);</span>
+            else
+<span class="fc" id="L66">                return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L68">        catch(IOException e) {</span>
+<span class="fc" id="L69">            LOG.log(Level.SEVERE,e.getLocalizedMessage());</span>
+<span class="fc" id="L70">            return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+        }
+    }
+
+    /**
+     * Responds to the GET request for all {@linkplain Product products}
+     * 
+     * @return ResponseEntity with array of {@link Product product} objects (may be empty) and
+     * HTTP status of OK&lt;br&gt;
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping(&quot;&quot;)
+    public ResponseEntity&lt;Product[]&gt; getProducts() {
+<span class="fc" id="L83">        LOG.info(&quot;GET /products&quot;);</span>
+
+        try{
+<span class="fc" id="L86">            Product product[] = productDao.getProducts();</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">            if(product != null){</span>
+<span class="fc" id="L88">                return new ResponseEntity&lt;Product[]&gt;(product,HttpStatus.OK);</span>
+            } else {
+<span class="fc" id="L90">                return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+            }
+<span class="fc" id="L92">        } catch(IOException e) {</span>
+<span class="fc" id="L93">            LOG.log(Level.SEVERE,e.getLocalizedMessage());</span>
+<span class="fc" id="L94">            return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+        }
+    }
+
+    /**
+     * Responds to the GET request for all {@linkplain Product products} whose name contains
+     * the text in name
+     * 
+     * @param name The name parameter which contains the text used to find the {@link Product products}
+     * 
+     * @return ResponseEntity with array of {@link Product product} objects (may be empty) and
+     * HTTP status of OK&lt;br&gt;
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * &lt;p&gt;
+     * Example: Find all products that contain the text &quot;ma&quot;
+     * GET http://localhost:8080/products/search?text=ma
+     */
+    @GetMapping(&quot;/search&quot;)
+    public ResponseEntity&lt;Product[]&gt; searchProducts(@RequestParam String text) {
+<span class="fc" id="L113">        LOG.info(&quot;GET /products/search?text=&quot;+text);</span>
+
+        try{
+<span class="fc" id="L116">            Product product[] = productDao.findProducts(text);</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            if(product != null){</span>
+<span class="fc" id="L118">                return new ResponseEntity&lt;Product[]&gt;(product,HttpStatus.OK);</span>
+            } else {
+<span class="fc" id="L120">                return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+            }
+<span class="fc" id="L122">        } catch(IOException e){</span>
+<span class="fc" id="L123">            LOG.log(Level.SEVERE,e.getLocalizedMessage());</span>
+<span class="fc" id="L124">            return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+        }
+    }
+
+    /**
+     * Creates a {@linkplain Product product} with the provided product object
+     * 
+     * @param product - The {@link Product product} to create
+     * 
+     * @return ResponseEntity with created {@link Product product} object and HTTP status of CREATED&lt;br&gt;
+     * ResponseEntity with HTTP status of CONFLICT if {@link Product product} object already exists&lt;br&gt;
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PostMapping(&quot;&quot;)
+    public ResponseEntity&lt;Product&gt; createProduct(@RequestBody Product product) {
+<span class="fc" id="L139">        LOG.info(&quot;POST /products &quot; + product);</span>
+
+        try{
+<span class="fc" id="L142">            product = productDao.createProduct(product);</span>
+<span class="fc bfc" id="L143" title="All 2 branches covered.">            if(product != null){</span>
+<span class="fc" id="L144">                return new ResponseEntity&lt;Product&gt;(product,HttpStatus.CREATED);</span>
+            } else {
+<span class="fc" id="L146">                return new ResponseEntity&lt;&gt;(HttpStatus.CONFLICT);</span>
+            }
+<span class="fc" id="L148">        } catch(Exception e) {</span>
+<span class="fc" id="L149">            LOG.log(Level.SEVERE,e.getLocalizedMessage());</span>
+<span class="fc" id="L150">            return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+        }
+    }
+
+    /**
+     * Updates the {@linkplain Product product} with the provided {@linkplain Product product} object, if it exists
+     * 
+     * @param product The {@link Product product} to update
+     * 
+     * @return ResponseEntity with updated {@link Product product} object and HTTP status of OK if updated&lt;br&gt;
+     * ResponseEntity with HTTP status of NOT_FOUND if not found&lt;br&gt;
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PutMapping(&quot;&quot;)
+    public ResponseEntity&lt;Product&gt; updateProduct(@RequestBody Product product) {
+<span class="fc" id="L165">        LOG.info(&quot;PUT /products &quot; + product);</span>
+
+        try{
+<span class="fc" id="L168">            product = productDao.updateProduct(product);</span>
+<span class="fc bfc" id="L169" title="All 2 branches covered.">            if(product != null){</span>
+<span class="fc" id="L170">                return new ResponseEntity&lt;Product&gt;(product,HttpStatus.OK);</span>
+            }else {
+<span class="fc" id="L172">                return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+            }
+<span class="fc" id="L174">        } catch(Exception e) {</span>
+<span class="fc" id="L175">        LOG.log(Level.SEVERE,e.getLocalizedMessage());</span>
+<span class="fc" id="L176">        return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+        }
+    }
+
+    /**
+     * Deletes a {@linkplain Product product} with the given id
+     * 
+     * @param id The id of the {@link Product product} to deleted
+     * 
+     * @return ResponseEntity HTTP status of OK if deleted&lt;br&gt;
+     * ResponseEntity with HTTP status of NOT_FOUND if not found&lt;br&gt;
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @DeleteMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Product&gt; deleteProduct(@PathVariable int id) {
+<span class="fc" id="L191">        LOG.info(&quot;DELETE /products/&quot; + id);</span>
+
+        try{
+<span class="fc bfc" id="L194" title="All 2 branches covered.">            if(productDao.deleteProduct(id)){</span>
+<span class="fc" id="L195">                return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
+            } else {
+<span class="fc" id="L197">                return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+            }
+<span class="fc" id="L199">        } catch(Exception e) {</span>
+<span class="fc" id="L200">            LOG.log(Level.SEVERE,e.getLocalizedMessage());</span>
+<span class="fc" id="L201">            return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

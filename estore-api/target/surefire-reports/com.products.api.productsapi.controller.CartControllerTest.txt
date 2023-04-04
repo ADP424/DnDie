@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.products.api.productsapi.controller.CartControllerTest
+-------------------------------------------------------------------------------
+Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.998 s - in com.products.api.productsapi.controller.CartControllerTest

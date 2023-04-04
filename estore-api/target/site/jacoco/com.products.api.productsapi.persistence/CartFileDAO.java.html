@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CartFileDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">products-api</a> &gt; <a href="index.source.html" class="el_package">com.products.api.productsapi.persistence</a> &gt; <span class="el_source">CartFileDAO.java</span></div><h1>CartFileDAO.java</h1><pre class="source lang-java linenums">package com.products.api.productsapi.persistence;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.logging.Logger;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import com.products.api.productsapi.model.Cart;
+
+@Component 
+public class CartFileDAO implements CartDAO{
+<span class="fc" id="L19">    private static final Logger LOG = Logger.getLogger(CartFileDAO.class.getName());</span>
+    Map&lt;Integer,Cart&gt; carts;   // Provides a local cache of the hero objects
+                                // so that we don't need to read from the file
+                                // each time
+    private ObjectMapper objectMapper;  // Provides conversion between Hero
+                                        // objects and JSON text format written
+                                        // to the file
+    private static int nextId;  // The next Id to assign to a new hero
+<span class="fc" id="L27">    private String filename = &quot;data/carts.json&quot;;    // Filename to read from and write to</span>
+
+<span class="fc" id="L29">    public CartFileDAO(@Value(&quot;${carts.file}&quot;) String filename,ObjectMapper objectMapper) throws IOException {</span>
+<span class="fc" id="L30">        this.filename = filename;</span>
+<span class="fc" id="L31">        this.objectMapper = objectMapper;</span>
+<span class="fc" id="L32">        load();  // load the heroes from the file</span>
+<span class="fc" id="L33">    }</span>
+
+    private synchronized static int nextId() {
+<span class="fc" id="L36">        int id = nextId;</span>
+<span class="fc" id="L37">        ++nextId;</span>
+<span class="fc" id="L38">        return id;</span>
+    }
+
+    private Cart[] getCartsArray() {
+<span class="fc" id="L42">        return getCartsArray(null);</span>
+    }
+
+    private Cart[] getCartsArray(String containsText) { // if containsText == null, no filter
+<span class="fc" id="L46">        ArrayList&lt;Cart&gt; cartsArrayList = new ArrayList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        for (Cart cart : carts.values()) {</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">            if (containsText == null) {</span>
+<span class="fc" id="L50">                cartsArrayList.add(cart);</span>
+            }
+<span class="fc" id="L52">        }</span>
+
+<span class="fc" id="L54">        Cart[] cartArray = new Cart[cartsArrayList.size()];</span>
+<span class="fc" id="L55">        cartsArrayList.toArray(cartArray);</span>
+<span class="fc" id="L56">        return cartArray;</span>
+    }
+
+    private boolean save() throws IOException {
+<span class="fc" id="L60">        Cart[] cartArray = getCartsArray();</span>
+
+        // Serializes the Java Objects to JSON objects into the file
+        // writeValue will thrown an IOException if there is an issue
+        // with the file or reading from the file
+<span class="fc" id="L65">        objectMapper.writeValue(new File(filename),cartArray);</span>
+<span class="fc" id="L66">        return true;</span>
+    }
+
+    private boolean load() throws IOException {
+<span class="fc" id="L70">        carts = new TreeMap&lt;&gt;();</span>
+<span class="fc" id="L71">        nextId = 0;</span>
+
+        // Deserializes the JSON objects from the file into an array of heroes
+        // readValue will throw an IOException if there's an issue with the file
+        // or reading from the file
+<span class="fc" id="L76">        Cart[] cartArray = objectMapper.readValue(new File(filename),Cart[].class);</span>
+
+        // Add each hero to the tree map and keep track of the greatest id
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        for (Cart cart : cartArray) {</span>
+<span class="fc" id="L80">            carts.put(cart.getId(),cart);</span>
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">            if (cart.getId() &gt; nextId)</span>
+<span class="fc" id="L82">                nextId = cart.getId();</span>
+        }
+        // Make the next id one greater than the maximum from the file
+<span class="fc" id="L85">        ++nextId;</span>
+<span class="fc" id="L86">        return true;</span>
+    }
+
+    /**
+    ** {@inheritDoc}
+     */
+    @Override
+    public Cart[] getCarts() {
+<span class="fc" id="L94">        synchronized(carts) {</span>
+<span class="fc" id="L95">            return getCartsArray();</span>
+        }
+    }
+
+    /**
+    ** {@inheritDoc}
+     */
+    @Override
+    public Cart getCart(int id) {
+<span class="fc" id="L104">        synchronized(carts) {</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">            if (carts.containsKey(id))</span>
+<span class="fc" id="L106">                return carts.get(id);</span>
+            else
+<span class="fc" id="L108">                return null;</span>
+        }
+    }
+
+    /**
+    ** {@inheritDoc}
+     */
+    @Override
+    public Cart createCart(Cart cart) throws IOException {
+<span class="fc" id="L117">        synchronized(carts) {</span>
+<span class="fc" id="L118">            Cart newCart = new Cart(nextId(),cart.getName(), cart.getCartProducts());</span>
+<span class="fc" id="L119">            carts.put(newCart.getId(),newCart);</span>
+<span class="fc" id="L120">            save(); // may throw an IOException</span>
+<span class="fc" id="L121">            return newCart;</span>
+        }
+    }
+
+    /**
+    ** {@inheritDoc}
+     */
+    @Override
+    public Cart updateCart(Cart cart) throws IOException {
+<span class="fc" id="L130">        synchronized(carts) {</span>
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">            if (carts.containsKey(cart.getId()) == false)</span>
+<span class="nc" id="L132">                return null;  // hero does not exist</span>
+
+<span class="fc" id="L134">            carts.put(cart.getId(),cart);</span>
+<span class="fc" id="L135">            save(); // may throw an IOException</span>
+<span class="fc" id="L136">            return cart;</span>
+        }
+    }
+
+    /**
+    ** {@inheritDoc}
+     */
+    @Override
+    public boolean deleteCart(int id) throws IOException {
+<span class="fc" id="L145">        synchronized(carts) {</span>
+<span class="fc bfc" id="L146" title="All 2 branches covered.">            if (carts.containsKey(id)) {</span>
+<span class="fc" id="L147">                carts.remove(id);</span>
+<span class="fc" id="L148">                return save();</span>
+            }
+            else
+<span class="fc" id="L151">                return false;</span>
+        }
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

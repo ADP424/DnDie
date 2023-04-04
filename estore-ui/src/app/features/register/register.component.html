@@ -1,0 +1,26 @@
+<div *ngIf="router.url == '/register'">
+    <title>DNDie | Register</title>
+    <link rel="stylesheet" href="/assets/css/forms.css">
+    <div class="form-container">
+        <h1 class="login-title">DNDie- Register</h1>
+        <form>
+            <div id="name-container">
+                    <input id="firstname-input" class="user-input short" type="text" name="firstname" [(ngModel)]="first_name" placeholder="First Name">
+                    <input id="lastname-input" class="user-input short right" type="text" name="lastname" [(ngModel)]="last_name" placeholder="Last Name">
+            </div>
+            <div id="username-container"><br>
+                    <input id="username-input" class="user-input" type="text" name="username" [(ngModel)]="username" placeholder="Username">
+            </div>
+            <div id="password-container"><br>
+                <input id="password-input" class="user-input" type="password" name="password" [(ngModel)]="password" placeholder="Password">
+            </div>
+            <br>
+            <div class="link-container">
+                <span class="noselect">Already have an account? </span>
+                <!-- TODO make this button redirect to the login page -->
+                <span class="link secondary-link" (click)="router.navigate(['/login']);">Login here</span>
+            </div>
+            <button class="button right" type="submit" (click)="RegisterUser()">Register</button>
+        </form>
+    </div>
+</div>

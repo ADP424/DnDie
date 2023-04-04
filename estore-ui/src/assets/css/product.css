@@ -1,0 +1,14 @@
+.productContainer {
+  display: inline-block;
+  margin: 5%;
+  position: relative;
+  cursor: pointer;
+}
+
+.productTitle {
+  font-size: 2em;
+}
+
+.productImg {
+  width: 13em;
+}

@@ -1,0 +1,20 @@
+<div *ngIf="router.url == '/home' || router.url == '' || router.url == '/'">
+  <link rel="stylesheet" href="/assets/css/pages.css">
+  <link rel="stylesheet" href="/assets/css/product.css">
+
+  <title>DNDie | Home</title>
+  <div class="main-container centered">
+    <div class="scroll-buffer"></div>
+    <div class="scroll-buffer"></div>
+    <!-- INSERT ANY HTML BELOW HERE -->
+    <h2>FEATURED PRODUCTS</h2>
+    <div *ngFor="let product of sortBy(products)" class="productContainer"
+      (click)="router.navigate(['/detail/'+product.id])">
+      <img class="productImg" src="/assets/dice/{{product.name}}.png">
+      <div class="productTitle">{{product.name}}</div>
+    </div>
+
+    <!-- INSERT ANY HTML ABOVE HERE -->
+    <div class="scroll-buffer"></div>
+  </div>
+</div>

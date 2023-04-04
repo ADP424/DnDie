@@ -1,0 +1,31 @@
+.nav-bar {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  text-align: right;
+  width: 100%;
+  /* TODO: Find a better color for the nav bar? */
+  background: rgb(13, 59, 48);
+}
+
+.nav-link {
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+  top: 12px;
+  color: var(--primary-link-color);
+}
+
+.main-title {
+  float: left;
+  color: var(--primary-link-color);
+  margin: 10px;
+  user-select: none;
+}
+
+.app {
+  margin: 0;
+  height: 100%;
+  background-attachment: fixed;
+}

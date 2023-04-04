@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="/assets/css/pages.css">
+<link rel="stylesheet" href="/assets/css/forms.css">
+
+<div *ngIf="router.url == '/process'">
+  <title>DNDie | Checkout</title>
+  <div class="main-container centered">
+    <div class="scroll-buffer"></div>
+    <h1 class="checkout-title">DNDie- Checkout</h1>
+
+    <div class="cart-container">
+      <input #firstName class="user-input short" placeholder='First Name' />
+      <input #lastName class="user-input short right" placeholder='Last Name' /><br><br>
+      <input #address class="user-input" placeholder='Address' /><br><br>
+      <input #city class="user-input first-third third" placeholder='City' />
+      <input #country class="user-input middle-third third" placeholder='State' />
+      <input #zipCode class="user-input last-third third" placeholder='Zip' /><br><br>
+      <input #email class="user-input" placeholder='Email' /><br><br>
+    <input #phoneNumber class="user-input" placeholder='Phone Number' /><br><br>
+
+    <div style="text-align:right;">
+      <h3 class="">Total Price: ${{newPrice}}</h3>
+      <button class="button right" type="submit" (click)="checkoutProcess()">Continue</button>
+    </div>
+
+
+    <div class="scroll-buffer"></div>
+    </div>
+  </div>
+</div>

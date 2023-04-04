@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">products-api</a> &gt; <a href="index.source.html" class="el_package">com.products.api.productsapi.model</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">package com.products.api.productsapi.model;
+
+import java.util.logging.Logger;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import ch.qos.logback.core.joran.conditional.ElseAction;
+/**
+ * Represents a User
+ * 
+ * @author Team 1
+ */
+public class User {
+<span class="fc" id="L14">    private static final Logger LOG = Logger.getLogger(Product.class.getName());</span>
+
+    // Package private for tests
+    static final String STRING_FORMAT = &quot;User [username = %s, password = %s, first_name = %s, last_name = %s, cart_number = %d]&quot;;
+
+    @JsonProperty(&quot;username&quot;) private String username;
+    @JsonProperty(&quot;password&quot;) private String password;
+    @JsonProperty(&quot;first_name&quot;) private String first_name;
+    @JsonProperty(&quot;last_name&quot;) private String last_name;
+    @JsonProperty(&quot;cart_number&quot;) private int cart_number;
+    @JsonProperty(&quot;is_admin&quot;) private boolean is_admin;
+
+    /**
+     * Create a user with a given username, password, and cart_number
+     * @param username The user's username
+     * @param password The user's password
+     * @param first_name The user's first name
+     * @param last_name The user's surname
+     * @param cart_number The user's cart number, matching them to a unique cart
+     * 
+     * {@literal @}JsonProperty is used in serialization and deserialization
+     * of the JSON object to the Java object in mapping the fields.  If a field
+     * is not provided in the JSON object, the Java field gets the default Java
+     * value, i.e. 0 for int
+     */
+    public User(@JsonProperty(&quot;username&quot;) String username, @JsonProperty(&quot;password&quot;) String password, 
+    @JsonProperty(&quot;first_name&quot;) String first_name, @JsonProperty(&quot;last_name&quot;) String last_name,
+<span class="fc" id="L41">    @JsonProperty(&quot;cart_number&quot;) int cart_number, @JsonProperty(&quot;is_admin&quot;) boolean is_admin) {</span>
+<span class="fc" id="L42">        this.username = username;</span>
+<span class="fc" id="L43">        this.password = password;</span>
+<span class="fc" id="L44">        this.first_name = first_name;</span>
+<span class="fc" id="L45">        this.last_name = last_name;</span>
+<span class="fc" id="L46">        this.cart_number = cart_number;</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (this.cart_number == 2) {</span>
+<span class="fc" id="L48">            this.is_admin = true;</span>
+        }
+        else {
+<span class="fc" id="L51">            this.is_admin = false;</span>
+        }
+<span class="fc" id="L53">    }</span>
+
+    /**
+     * Retrieves the user's username
+     * @return The user's username
+     */
+<span class="fc" id="L59">    public String getUsername() {return username;}</span>
+
+
+    /**
+     * Retrieves the user's password
+     * @return The user's password
+     */
+<span class="fc" id="L66">    public String getPassword() {return password;}</span>
+
+    /**
+     * Retrieves the user's first name
+     * @return The user's first name
+     */
+<span class="fc" id="L72">    public String getFirstName() {return first_name;}</span>
+
+
+    /**
+     * Retrieves the user's surname
+     * @return The user's surname
+     */
+<span class="fc" id="L79">    public String getLastName() {return last_name;}</span>
+
+    /**
+     * Retrieves the user's cart number
+     * @return The cart number associated with the user
+     */
+<span class="fc" id="L85">    public int getCartNumber() {return cart_number;}</span>
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+<span class="fc" id="L92">        return String.format(STRING_FORMAT, username, password, first_name, last_name, cart_number, is_admin);</span>
+    }
+
+    public boolean get_is_admin() {
+<span class="fc" id="L96">        return this.is_admin;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

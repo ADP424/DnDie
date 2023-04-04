@@ -1,0 +1,7 @@
+<link rel="stylesheet" href="/assets/css/search.css">
+<div id="search-component">
+  <div class="search-container">
+    <img class="search-icon" src="/assets/images/search-icon.png"/>
+    <input (input)="searchDice.emit()" #searchBox id="search-box" class="search-box" placeholder="Search for some dice..." (input)="search(searchBox.value)" />
+  </div>
+</div>
