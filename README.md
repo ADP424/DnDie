@@ -1,7 +1,6 @@
 # E-Store:  DNDie
-<!-- # Modify this document to expand any and all sections that are applicable for a better understanding from your users/testers/collaborators (remove this comment and other instructions areas for your FINAL release) -->
 
-An online E-store system built with Java 8=>11 and AngularJS
+An online E-store system built with Java 8=>11 and Angular
   
 ## Team
 
@@ -11,12 +10,11 @@ An online E-store system built with Java 8=>11 and AngularJS
 - Aidan Dalgarno-Platt
 - Kai Louie
 
-
 ## Prerequisites
 
 - Java 8=>11 (Make sure to have correct JAVA_HOME setup in your environment)
 - Maven
-- AngularJS
+- Angular
 
 NOTE: You must have `matter-js` installed to run this project.
 This will NOT be installed automatically with `npm install`!
@@ -28,7 +26,7 @@ To install `matter-js` and all prerequisites:
 
 ## How to run
 
-_Note: a live version of this project can be found at `https://mdbook.me:4200`_
+_Note: a live version was created at `https://mdbook.me:4200`, although this has been discontinued_
 
 1. Clone the repository and navigate to `/estore-api`.
 2. Execute `mvn compile exec:java`
@@ -40,11 +38,6 @@ _Note: a live version of this project can be found at `https://mdbook.me:4200`_
 ## Known bugs and disclaimers
 
 No known bugs or disclaimers so far.
-<!-- (It may be the case that your implementation is not perfect.)
-
-Document any known bug or nuisance.
-If any shortcomings, make clear what these are and where they are located. -->
-
 
 ## How to test it
 
@@ -70,7 +63,6 @@ To run tests on all the tiers in isolation do this:
 
 *(Consider using `mvn clean verify` to attest you have reached the target threshold for coverage)
   
-  
 ## How to generate the Design documentation PDF
 
 1. Access the `PROJECT_DOCS_HOME/` directory
@@ -82,4 +74,3 @@ To run tests on all the tiers in isolation do this:
 MIT License
 
 See LICENSE for details.
-<!-- TODO: Add license -->
